@@ -1,15 +1,15 @@
 ---
 - name: Set MountFlags in docker service
   hosts: all
-  become: root
-
+  become: yes
+  become_user: root
   tasks:
     - name: Configure docker service
       include: tasks/configure_docker_service.yml
 
 - name: Create etcd cluster
   hosts: etcd
-  become: root
+  become: yes
 
   tasks:
     - name: Create etcd cluster for 3PAR Docker Volume plugin
@@ -18,10 +18,10 @@
 
 - name: Install HPE 3PAR Volume Driver for Kubernetes/OpenShift
   hosts: all
-  become: root
+  become: yes
 
   vars:
-    driver_path: "/usr/libexec/kubernetes/kubelet-plugins/volume/exec/hpe.com~hpe/"
+    driver_path: "/var/lib/kubelet/volume-plugins/exec/hpe.com~hpe/"
 
   vars_prompt:
     - name: "storage_config"
@@ -47,7 +47,7 @@
 
 - name: Install HPE 3PAR Volume Driver for Kubernetes/OpenShift
   hosts: masters
-  become: root
+  become: yes
 
   tasks:
     - name: Start Dynamic Provisioner (doryd) on Master node

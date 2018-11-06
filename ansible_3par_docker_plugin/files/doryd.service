@@ -3,7 +3,7 @@ Description=manage doryd service for HPE 3PAR Volume plugin for Docker
 
 [Service]
 Type=simple
-ExecStart=/usr/libexec/kubernetes/kubelet-plugins/volume/exec/hpe.com~hpe/doryd /etc/kubernetes/admin.conf hpe.com
+ExecStart=/var/lib/kubelet/volume-plugins/exec/hpe.com~hpe/doryd /etc/kubernetes/admin.conf hpe.com
 Restart=on-abort
 
 [Install]
